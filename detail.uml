@@ -1,0 +1,19 @@
+@startuml
+node ROS_MASTER {
+		  component roscore
+}
+
+node raspberrypi.local {
+		  component digi_temper <<publisher>> as publisher
+		    component DigiUSB as sensor
+}
+
+node digispark <<USB>> {
+}
+
+sensor ..> digispark : read
+digispark ..> LM61CIZ
+
+publisher -up-> roscore : publish sensor data
+publisher ..> sensor : read
+@enduml

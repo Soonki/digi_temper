@@ -1,0 +1,13 @@
+@startuml
+node ROS_MASTER {
+		  component roscore
+}
+
+node raspberrypi.local {
+		  component publisher
+		    component sensor
+}
+
+publisher -up-> roscore : publish sensor data
+publisher ..> sensor : read
+@enduml
